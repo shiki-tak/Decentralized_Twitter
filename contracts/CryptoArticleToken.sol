@@ -30,7 +30,7 @@ contract CryptoArticleToken is ERC721Token {
   function _owns(address _claimant, uint256 _tokenId) internal view returns (bool) {
     return tokenIndexToOwner[_tokenId] == _claimant;
   }
-  
+
   function _transfer(address _from, address _to, uint256 _tokenId) internal {
     ownershipTokenCount[_to]++;
     tokenIndexToOwner[_tokenId] = _to;
