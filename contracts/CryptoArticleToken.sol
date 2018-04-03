@@ -61,6 +61,7 @@ contract CryptoArticleToken is ERC721Token {
         mintedAt: uint64(now)
       });
       uint256 tokenId = cryptoArticles.push(cryptoArticle) - 1;
+      ownedTokens[msg.sender].push(tokenId);
       super._mint(msg.sender, tokenId);
 
       Mint(msg.sender, tokenId);
