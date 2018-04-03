@@ -26,7 +26,11 @@ contract CryptoArticleToken is ERC721Token {
   /* CONSTRUCTOR */
   function CryptoArticleToken(string _name, string _symbol) public ERC721Token(_name, _symbol) {}
 
-  /*** INTERNAL FUNCTIONS ***/
+  /* INTERNAL FUNCTIONS */
+  function _owns(address _claimant, uint256 _tokenId) internal view returns (bool) {
+    return tokenIndexToOwner[_tokenId] == _claimant;
+  }
+  
   function _transfer(address _from, address _to, uint256 _tokenId) internal {
     ownershipTokenCount[_to]++;
     tokenIndexToOwner[_tokenId] = _to;
@@ -49,12 +53,30 @@ contract CryptoArticleToken is ERC721Token {
 
       tokenId = cryptoArticles.push(cryptoArticle) - 1;
       ownedTokens[_owner].push(tokenId);
+      _transfer(0, _owner, tokenId);
+
       Mint(_owner, tokenId);
   }
 
-  /*** EXTERNAL FUNCTIONS ***/
+  /* ERC721 IMPLEMENTATION */
+  function totalSupply() public view returns (uint256) {
+    return cryptoArticles.length;
+  }
+
+  function balanceOf(address _owner) public view returns (uint256) {
+    return ownershipTokenCount[_owner];
+  }
+
   function mint(string _title, string _content, bool _publishing) external returns (uint256) {
     return _mint(_title, _content, _publishing, msg.sender);
+  }
+
+  function transfer(address _to, uint256 _tokenId) external {
+    require(_to != address(0));
+    require(_to != address(this));
+    require(_owns(msg.sender, _tokenId));
+
+    _transfer(msg.sender, _to, _tokenId);
   }
 
   function getArticle(uint256 _tokenId) external view returns (string title, string content, address mintedBy, uint64 mintedAt) {
