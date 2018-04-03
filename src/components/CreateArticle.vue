@@ -16,6 +16,25 @@
       <button @click="createArticle">Create</button>
     </div>
     <div class="message" v-if="message">{{message}}</div>
+
+    <h4>Blogs</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Content</th>
+        </tr>
+      </thead>
+      <tbody v-for="(blog, key, index) in blogs" :key="index">
+        <tr>
+          <td>{{ blog.id }}</td>
+          <td>{{ blog.title }}</td>
+          <td>{{ blog.content }}</td>
+        </tr>
+      </tbody>
+    </table>
+
   </div>
 </template>
 
@@ -29,6 +48,7 @@ export default {
   name: 'CreateArticle',
   data() {
     return {
+      blogs: [],
       message: null,
       contractAddress: null,
       account: null,
@@ -56,6 +76,8 @@ export default {
           this.contractAddress = address
         })
     })
+    this.updateArticle();
+    console.log(this.blogs)
   },
   methods: {
     createArticle() {
@@ -80,7 +102,13 @@ export default {
     },
     getArticle(tokenId) {
       CryptoArticle.deployed().then((instance) => instance.getArticle(tokenId, { from: this.account })).then((r) => {
-        console.log(r);
+        var blog = {
+          "title": null,
+          "content": null
+        }
+        blog.title = r[0].toString()
+        blog.content = r[1].toString()
+        this.blogs.push(blog)
       })
     }
   }
