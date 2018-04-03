@@ -1,23 +1,6 @@
 <template>
-  <div class="createarticle">
-    <div class="content">
-      <h3>Create Article</h3>
-      <p v-if="contractAddress">The contract is deployed at {{contractAddress}}</p>
-      <p v-if="!contractAddress">No contracts found</p>
-      <p v-if="account">Current account: {{account}}</p>
-      <p v-if="!account">No accounts found</p>
-
-      <h5>title</h5>
-      <input v-model="title" type="text">
-      <h5>content</h5>
-      <input v-model="content" type="text">
-      <div class="blog create button">
-        <button @click="createArticle">Create</button>
-      </div>
-    </div>
-    <div class="message" v-if="message">{{message}}</div>
-
-    <h4>Blogs</h4>
+  <div class="timeline">
+    <h3>This is an timeline page</h3>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -34,7 +17,6 @@
         </tr>
       </tbody>
     </table>
-
   </div>
 </template>
 
@@ -50,8 +32,6 @@ export default {
     return {
       blogs: [],
       message: null,
-      contractAddress: null,
-      account: null,
       title: null,
       content: null
     }
@@ -95,7 +75,7 @@ export default {
         })
     },
     updateArticle() {
-      CryptoArticle.deployed().then((instance) => instance.getAllArticlesOfOwner(this.account, { from: this.account })).then((r) => {
+      CryptoArticle.deployed().then((instance) => instance.getAllArticles()).then((r) => {
         for (var i = 0; i < r.length; i++) {
           this.getArticle(r[i]);
         }

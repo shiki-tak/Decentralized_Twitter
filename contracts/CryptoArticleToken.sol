@@ -42,22 +42,6 @@ contract CryptoArticleToken is ERC721Token {
     Transfer(_from, _to, _tokenId);
   }
 
-  function _mint(string _title, string _content, bool _publishing, address _owner) internal returns (uint tokenId) {
-    CryptoArticle memory cryptoArticle = CryptoArticle({
-        title: _title,
-        content: _content,
-        publishing: _publishing,
-        mintedBy: _owner,
-        mintedAt: uint64(now)
-      });
-
-      tokenId = cryptoArticles.push(cryptoArticle) - 1;
-      ownedTokens[_owner].push(tokenId);
-      _transfer(0, _owner, tokenId);
-
-      Mint(_owner, tokenId);
-  }
-
   /* ERC721 IMPLEMENTATION */
   function totalSupply() public view returns (uint256) {
     return cryptoArticles.length;
@@ -68,7 +52,19 @@ contract CryptoArticleToken is ERC721Token {
   }
 
   function mint(string _title, string _content, bool _publishing) external returns (uint256) {
-    return _mint(_title, _content, _publishing, msg.sender);
+
+    CryptoArticle memory cryptoArticle = CryptoArticle({
+        title: _title,
+        content: _content,
+        publishing: _publishing,
+        mintedBy: msg.sender,
+        mintedAt: uint64(now)
+      });
+      uint256 tokenId = cryptoArticles.push(cryptoArticle) - 1;
+      super._mint(msg.sender, tokenId);
+
+      Mint(msg.sender, tokenId);
+      return tokenId;
   }
 
   function transfer(address _to, uint256 _tokenId) external {
@@ -77,6 +73,14 @@ contract CryptoArticleToken is ERC721Token {
     require(_owns(msg.sender, _tokenId));
 
     _transfer(msg.sender, _to, _tokenId);
+  }
+
+  function burn(uint256 _tokenId) public {
+    super._burn(ownerOf(_tokenId), _tokenId);
+    if (cryptoArticles.length != 0) {
+      delete cryptoArticles[_tokenId];
+    }
+
   }
 
   function getArticle(uint256 _tokenId) external view returns (string title, string content, address mintedBy, uint64 mintedAt) {
@@ -90,5 +94,9 @@ contract CryptoArticleToken is ERC721Token {
 
   function getAllArticlesOfOwner(address _owner) external view returns (uint256[]) {
     return ownedTokens[_owner];
+  }
+
+  function getAllArticles() external view returns (uint256) {
+    return cryptoArticles.length;
   }
 }
