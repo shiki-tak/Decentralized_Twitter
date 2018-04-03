@@ -10,7 +10,7 @@
       <h5>content</h5>
       <input v-model="content">
       <br>
-      <!-- <button @click="createArticle">Create</button> -->
+      <button @click="createArticle">Create</button>
     </div>
   </div>
 </template>
@@ -51,6 +51,20 @@ export default {
           this.contractAddress = address
         })
     })
+  },
+  methods: {
+    createArticle() {
+      this.message = "Transaction started";
+      return CryptoArticle.deployed()
+        .then((instance) => instance.mint(this.title, this.content, true, { from: this.account }))
+        .then(() => {
+          this.message = "Transaction done"
+        })
+        .catch((e) => {
+          console.error(e)
+          this.message = "Transaction failed"
+        })
+    }
   }
 }
 </script>
