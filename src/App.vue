@@ -11,7 +11,9 @@
         <p>Decentralized Twitter</p>
       </div>
     </div>
-    <router-view/>
+    <div class="middle">
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -38,7 +40,6 @@ export default {
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   color: #2c3e50;
-  padding: 30px;
 }
 
 #nav {
@@ -68,5 +69,9 @@ export default {
   font-size: 45px;
   text-align: center;
   color: white;
+}
+
+.middle {
+  padding: 10px;
 }
 </style>
