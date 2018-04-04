@@ -1,40 +1,39 @@
 <template>
-  <div class="createarticle">
+  <div class="article">
     <div class="content">
       <h3>Create Article</h3>
       <p v-if="contractAddress">The contract is deployed at {{contractAddress}}</p>
       <p v-if="!contractAddress">No contracts found</p>
       <p v-if="account">Current account: {{account}}</p>
       <p v-if="!account">No accounts found</p>
-
-      <h5>title</h5>
-      <input v-model="title" type="text">
-      <h5>content</h5>
-      <input v-model="content" type="text">
-      <div class="blog create button">
-        <button @click="createArticle">Create</button>
-      </div>
+      <h3>Tweet</h3>
+      <form novalidate class="md-layout">
+        <md-card-content>
+          <div class="md-layout md-gutter">
+            <md-field>
+              <label for="title">Title</label>
+              <md-input type="text" name="title" id="title" autocomplete="title" v-model="title" class="blog form" />
+            </md-field>
+            <md-field>
+              <label for="content">Content</label>
+              <md-input type="text" name="content" id="content" autocomplete="content" v-model="content" class="blog form" />
+            </md-field>
+          </div>
+          <md-card-actions>
+            <div class="blog create button">
+              <md-button @click="createArticle">Create</md-button>
+            </div>
+          </md-card-actions>
+        </md-card-content>
+      </form>
     </div>
     <div class="message" v-if="message">{{message}}</div>
-
     <h4>Blogs</h4>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Title</th>
-          <th scope="col">Content</th>
-        </tr>
-      </thead>
-      <tbody v-for="(blog, key, index) in blogs" :key="index">
-        <tr>
-          <td>{{ blog.id }}</td>
-          <td>{{ blog.title }}</td>
-          <td>{{ blog.content }}</td>
-        </tr>
-      </tbody>
-    </table>
-
+    <div v-for="(blog, key, index) in blogs" :key="index">
+      <p>{{ blog.title }}</p>
+      <p>{{ blog.content }}</p>
+      <button @click="deleteArticle(blog.id)">Delete</button>
+    </div>
   </div>
 </template>
 
@@ -45,7 +44,7 @@ import artifacts from '../../build/contracts/CryptoArticleToken.json'
 const CryptoArticle = contract(artifacts)
 
 export default {
-  name: 'CreateArticle',
+  name: 'Article',
   data() {
     return {
       blogs: [],
@@ -104,14 +103,28 @@ export default {
     getArticle(tokenId) {
       CryptoArticle.deployed().then((instance) => instance.getArticle(tokenId, { from: this.account })).then((r) => {
         var blog = {
+          "id": null,
           "title": null,
-          "content": null
+          "content": null,
+          "mintedBy": null
         }
+        blog.id = tokenId
         blog.title = r[0].toString()
         blog.content = r[1].toString()
+        console.log(r)
         this.blogs.push(blog)
+      })
+    },
+    deleteArticle(tokenId){
+      CryptoArticle.deployed().then((instance) => instance.burn(tokenId, { from: this.account })).then((r) => {
+        this.updateArticle();
       })
     }
   }
 }
 </script>
+<style>
+.blog.form {
+  width: 400px !important;
+}
+</style>
