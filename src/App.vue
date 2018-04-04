@@ -1,10 +1,15 @@
 <template>
   <div id="app">
     <link rel="stylesheet" href="https://unpkg.com/vue-material@beta/dist/theme/default.css">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/timeline"> Timeline</router-link> |
-      <router-link to="/blog">Blog</router-link>
+    <div class="header">
+      <div id="nav">
+        <router-link to="/">Home</router-link> |
+        <router-link to="/timeline"> Timeline</router-link> |
+        <router-link to="/blog">Blog</router-link>
+      </div>
+      <div class="app title">
+        <p>Decentralized Twitter</p>
+      </div>
     </div>
     <router-view/>
   </div>
@@ -44,6 +49,24 @@ export default {
       color: #42b983;
     }
   }
+  padding-top: 15px;
+  padding-left: 15px;
 }
 
+.header {
+  background-color: #303030;
+  height: 300px;
+  width: 100%;
+}
+
+#nav a {
+  color: white;
+}
+
+.app.title {
+  padding-top: 50px;
+  font-size: 45px;
+  text-align: center;
+  color: white;
+}
 </style>

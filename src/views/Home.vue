@@ -1,6 +1,21 @@
 <template>
   <div class="home">
     <SimpleStorage/>
+    <h1>How to use it</h1>
+    <div class="metamask install">
+      <h2>1. Install MetaMask</h2>
+      <ul>
+        <li>まず、Google Chrome用のプラグインである<a href="https://metamask.io/">MetaMask</a>をインストールします。</li>
+        <li>MetaMaskはEthereumを使った分散型アプリケーション(DApps)を簡単に使うことができるプラグインであり、現在開発されているDAppsはほとんどMetaMaskを使って動作する用に作られています。</li>
+        <li>インストールが完了したら、ネットワークをRopsten Test Networkに設定します。</li>
+      </ul>
+    </div>
+    <div class="tweet">
+      <h2>2. Send DTweet</h2>
+      <ul>
+        <li>DTweetタブから分散型ツイート(DTweet)しよう。</li>
+      </ul>
+    </div>
   </div>
 </template>
 
