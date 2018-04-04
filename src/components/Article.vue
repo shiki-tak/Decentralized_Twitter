@@ -4,7 +4,7 @@
       <h3>Create Article</h3>
       <p v-if="contractAddress">The contract is deployed at {{contractAddress}}</p>
       <p v-if="!contractAddress">No contracts found</p>
-      <p v-if="account">Current account: {{account}}</p>
+      <p v-if="account">Current address: {{account}}</p>
       <p v-if="!account">No accounts found</p>
       <h3>Tweet</h3>
       <form novalidate class="md-layout">
@@ -28,11 +28,12 @@
       </form>
     </div>
     <div class="message" v-if="message">{{message}}</div>
-    <h4>Blogs</h4>
+    <div class="transaction" v-if="transaction">{{transaction}}</div>
+    <h4>Your DTweet</h4>
     <div v-for="(blog, key, index) in blogs" :key="index">
-      <p>{{ blog.title }}</p>
-      <p>{{ blog.content }}</p>
-      <button @click="deleteArticle(blog.id)">Delete</button>
+      <p>Title: {{ blog.title }}</p>
+      <p>Content: {{ blog.content }}</p>
+      <md-button class="md-raised md-accent" @click="deleteArticle(blog.id)">Delete</md-button>
     </div>
   </div>
 </template>
@@ -49,6 +50,7 @@ export default {
     return {
       blogs: [],
       message: null,
+      transaction: null,
       contractAddress: null,
       account: null,
       title: null,
@@ -80,12 +82,14 @@ export default {
   methods: {
     createArticle() {
       this.message = "Transaction started";
+      this.title = null
+      this.content = null
       return CryptoArticle.deployed()
         .then((instance) => instance.mint(this.title, this.content, true, { from: this.account }))
-        .then(() => {
+        .then((r) => {
+          this.transaction = JSON.stringify(JSON.parse(r), null, "    ");
           this.message = "Transaction done"
-          this.title = null
-          this.content = null
+          this.blogs = []
           this.updateArticle();
         })
         .catch((e) => {
@@ -111,12 +115,13 @@ export default {
         blog.id = tokenId
         blog.title = r[0].toString()
         blog.content = r[1].toString()
-        console.log(r)
         this.blogs.push(blog)
       })
     },
     deleteArticle(tokenId){
       CryptoArticle.deployed().then((instance) => instance.burn(tokenId, { from: this.account })).then((r) => {
+        console.log("delete")
+        console.log(r)
         this.updateArticle();
       })
     }
