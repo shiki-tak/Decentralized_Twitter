@@ -5,7 +5,7 @@
       <div id="nav">
         <router-link to="/">Home</router-link> |
         <router-link to="/timeline"> Timeline</router-link> |
-        <router-link to="/blog">Blog</router-link>
+        <router-link to="/tweet">Tweet</router-link>
       </div>
       <div class="app title">
         <p>Decentralized Twitter</p>

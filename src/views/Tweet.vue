@@ -1,5 +1,5 @@
 <template>
-  <div class="blog">
+  <div class="tweet">
     <Article/>
   </div>
 </template>
@@ -9,7 +9,7 @@
 import Article from '@/components/Article.vue'
 
 export default {
-  name: 'blog',
+  name: 'tweet',
   components: {
     Article
   }
