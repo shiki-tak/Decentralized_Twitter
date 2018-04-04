@@ -82,14 +82,13 @@ export default {
   methods: {
     createArticle() {
       this.message = "Transaction started";
-      this.title = null
-      this.content = null
       return CryptoArticle.deployed()
         .then((instance) => instance.mint(this.title, this.content, true, { from: this.account }))
         .then((r) => {
-          this.transaction = JSON.stringify(JSON.parse(r), null, "    ");
-          this.message = "Transaction done"
-          this.blogs = []
+          this.transaction = r
+          this.message = "Transaction result"
+          this.title = null
+          this.content = null
           this.updateArticle();
         })
         .catch((e) => {
@@ -120,8 +119,6 @@ export default {
     },
     deleteArticle(tokenId){
       CryptoArticle.deployed().then((instance) => instance.burn(tokenId, { from: this.account })).then((r) => {
-        console.log("delete")
-        console.log(r)
         this.updateArticle();
       })
     }
