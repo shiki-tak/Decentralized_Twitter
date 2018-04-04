@@ -58,4 +58,8 @@ contract CryptoArticleToken is ERC721Token {
   function getAllArticlesOfOwner(address _owner) external view returns (uint256[]) {
     return ownedTokens[_owner];
   }
+
+  function getAllArticles() external view returns (uint256[]) {
+    return allTokens;
+  }
 }

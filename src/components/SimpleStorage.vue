@@ -70,7 +70,6 @@ export default {
     },
     updateCurrentNumber() {
       SimpleStorage.deployed().then((instance) => instance.get()).then((r) => {
-        console.log(r.toNumber())
         this.currentNumber = r.toNumber()
       });
     },
