@@ -15,7 +15,7 @@ export default new Router({
     },
     {
       path: '/timeline',
-      name: 'Timeline',
+      name: 'timeline',
       component: Timeline
     },
     {

@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <link rel="stylesheet" href="https://unpkg.com/vue-material@beta/dist/theme/default.css">
     <div class="header">
       <div id="nav">
         <router-link to="/">Home</router-link> |
