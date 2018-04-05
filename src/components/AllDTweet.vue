@@ -1,6 +1,15 @@
 <template>
-  <div class="timeline">
-    <AllDTweet />
+  <div class="alldtweet">
+    <center>
+      <h3>All DTweet</h3>
+    </center>
+    <div class>
+      <div v-for="(blog, key, index) in blogs" :key="index" class="dtweet list">
+        <p>Title: {{ blog.title }}</p>
+        <p>Content: {{ blog.content }}</p>
+        <md-button class="md-raised" @click="deleteArticle(blog.id)">Delete</md-button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -9,15 +18,10 @@ import Web3 from 'web3'
 import contract from 'truffle-contract'
 import artifacts from '../../build/contracts/CryptoArticleToken.json'
 
-import AllDTweet from '@/components/AllDTweet.vue'
 const CryptoArticle = contract(artifacts)
 
 export default {
-  name: 'CreateArticle',
-  components: {
-    AllDTweet
-  },
-
+  name: 'AllDTweet',
   data() {
     return {
       blogs: [],
@@ -98,8 +102,13 @@ export default {
   }
 }
 </script>
+
 <style>
-.timeline {
-  padding: 15px;
+.dtweet.list {
+  border-bottom: solid 1px rgba(0,0,0,0.42);
+  margin-left: 300px;
+  margin-right: 300px;
+  margin-top: 50px;
 }
+
 </style>

@@ -86,6 +86,7 @@ export default {
 
     CryptoArticle.setProvider(web3.currentProvider)
     web3.eth.getAccounts((err, accs) => {
+      // このタイミングでcrrentProviderのnetwork idを調べると、UIが動的に更新されるみたい
       if (web3.currentProvider.publicConfigStore._state.networkVersion !== '3') {
         this.is_network = false
       } else {

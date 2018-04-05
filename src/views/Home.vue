@@ -48,13 +48,10 @@
 </template>
 
 <script>
-// @ is an apas to /src
-import SimpleStorage from '@/components/SimpleStorage.vue'
-
 export default {
   name: 'home',
   components: {
-    SimpleStorage
+    
   }
 }
 </script>
