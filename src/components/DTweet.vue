@@ -45,7 +45,7 @@
       <div v-for="(dtweet, key, index) in dtweets" :key="index" class="dtweet list myself">
         <p>Title: {{ dtweet.title }}</p>
         <p>Content: {{ dtweet.content }}</p>
-        <md-button class="md-raised" @click="deleteDTweet(dtweet.id)">Delete</md-button>
+        <md-button class="md-raised" @click="deleteDTweet(dtweet.id)">Burn</md-button>
       </div>
     </div>
   </div>

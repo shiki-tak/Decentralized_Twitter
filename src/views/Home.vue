@@ -4,13 +4,15 @@
       <div class="name">
         <p>Decentralized Twitter</p>
       </div>
+      <h3>Ethereumを使った分散型アプリケーションとしてのTweetサイト</h3>
     </div>
     <div class="about">
       <center>
         <h1>About</h1>
-        <p>これは分散型アプリケーション(DApps)として作られたtweet投稿サイトです。</p>
+        <p>これはEthereumを使ったtweet投稿サイトです。</p>
         <p>このサイトではTweetに代わって、DTweet(Decentralized Tweet)を行うことができます。</p>
         <p>あなたのDTweetはブロックチェーンの一つであるEthereum上に記録され、運営主体にデータを集められることはありません。</p>
+        <p>DTweetはERC721トークンとして発行されており、Burnすることもできます。</p>
         <p>現在、テストネットの一つ、Ropsten Test Networkでご利用いただけます。</p>
       </center>
     </div>
@@ -73,7 +75,7 @@ export default {
 .app.title {
   background-color: #303030;
   height: 265px;
-  text-apgn: center;
+  text-align: center;
   color: white;
 }
 

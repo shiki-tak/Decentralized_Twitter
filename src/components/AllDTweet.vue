@@ -8,7 +8,6 @@
         <p>Title: {{ dtweet.title }}</p>
         <p>Content: {{ dtweet.content }}</p>
         <p>Account Address: {{ dtweet.mintedBy }}</p>
-        <md-button class="md-raised" @click="deleteDTweet(dtweet.id)">Delete</md-button>
       </div>
     </div>
   </div>
