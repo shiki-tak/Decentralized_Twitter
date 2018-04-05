@@ -18,6 +18,7 @@ export default {
 
 <style>
 .tweet {
+  height: -webkit-fill-available;
   padding: 15px;
 }
 </style>

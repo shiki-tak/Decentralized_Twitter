@@ -4,10 +4,13 @@
       <div id="nav">
         <router-link to="/">Home</router-link> |
         <router-link to="/timeline"> Timeline</router-link> |
-        <router-link to="/tweet">Tweet</router-link>
+        <router-link to="/tweet">DTweet</router-link>
       </div>
     </div>
     <router-view/>
+    <div class="footer">
+      Made by <a href="https://twitter.com/shiki_tak">shiki_tak</a>
+    </div>
   </div>
 </template>
 
@@ -58,4 +61,10 @@ export default {
   color: white;
 }
 
+.footer {
+  height: 60px;
+  background-color: #eee;
+  padding: 10px 20px 30px 20px;
+  position: relative;
+}
 </style>

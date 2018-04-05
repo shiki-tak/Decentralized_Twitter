@@ -97,6 +97,7 @@ export default {
 </script>
 <style>
 .timeline {
+  height: -webkit-fill-available;
   padding: 15px;
 }
 </style>

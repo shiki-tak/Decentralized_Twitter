@@ -1,11 +1,13 @@
 <template>
   <div class="article">
     <div class="content post">
-      <h3>App Info</h3>
-      <p v-if="contractAddress">The contract is deployed at {{contractAddress}}</p>
-      <p v-if="!contractAddress">No contracts found</p>
-      <p v-if="account">Current address: {{account}}</p>
-      <p v-if="!account">No accounts found</p>
+      <center>
+        <h3>App Info</h3>
+        <p v-if="contractAddress">The contract is deployed at {{contractAddress}}</p>
+        <p v-if="!contractAddress">No contracts found</p>
+        <p v-if="account">Current address: {{account}}</p>
+        <p v-if="!account">No accounts found</p>
+      </center>
       <center>
         <h3>DTweetする</h3>
         <form novalidate class="md-layout">
@@ -29,10 +31,14 @@
         </form>
       </center>
     </div>
-    <div class="message" v-if="message">{{message}}</div>
-    <div class="transaction" v-if="transaction">{{transaction}}</div>
     <center>
-      <h4>Your DTweet</h4>
+      <h3>Transaction State</h3>
+      <div class="message" v-if="message">{{message}}</div>
+      <div class="message" v-if="!message">transaction nothing</div>
+      <div class="tx_hash" v-if="tx_hash">Tx Hash: <router-link :to="{ name: 'https://ropsten.etherscan.io/tx/' + tx_hash }">{{tx_hash}}</router-link></div>
+    </center>
+    <center>
+      <h3>Your DTweet</h3>
     </center>
     <div class>
       <div v-for="(blog, key, index) in blogs" :key="index" class="dtweet list myself">
@@ -56,7 +62,7 @@ export default {
     return {
       blogs: [],
       message: null,
-      transaction: null,
+      tx_hash: null,
       contractAddress: null,
       account: null,
       title: null,
@@ -91,7 +97,8 @@ export default {
       return CryptoArticle.deployed()
         .then((instance) => instance.mint(this.title, this.content, true, { from: this.account }))
         .then((r) => {
-          this.transaction = r
+          this.tx_hash = r.tx
+          console.log(r.tx)
           this.message = "Transaction result"
           this.title = null
           this.content = null
@@ -125,6 +132,7 @@ export default {
     },
     deleteArticle(tokenId){
       CryptoArticle.deployed().then((instance) => instance.burn(tokenId, { from: this.account })).then((r) => {
+        this.tx_hash = r.tx
         this.updateArticle();
       })
     }
