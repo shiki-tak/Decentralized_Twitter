@@ -1,10 +1,16 @@
 <template>
   <div class="home">
+    <div class="app title">
+      <div class="name">
+        <p>Decentralized Twitter</p>
+      </div>
+    </div>
     <div class="about">
       <center>
         <h1>About Us</h1>
         <p>これは分散型アプリケーション(DApps)として作られたtweet投稿サイトです。</p>
-        <p>あなたのtweetはブロックチェーンの一つであるEthereum上に記録され、運営主体にデータを集められることはありません。</p>
+        <p>このサイトではTweetに代わって、DTweet(Decentralized Tweet)を行うことができます。</p>
+        <p>あなたのDTweetはブロックチェーンの一つであるEthereum上に記録され、運営主体にデータを集められることはありません。</p>
         <p>現在、テストネットの一つ、Ropsten Test Networkでご利用いただけます。</p>
       </center>
     </div>
@@ -43,6 +49,18 @@ export default {
 </script>
 
 <style>
+.app.title {
+  background-color: #303030;
+  height: 265px;
+  text-align: center;
+  color: white;
+}
+
+.name {
+  margin-top: -15px;
+  padding-top: 30px;
+  font-size: 45px;
+}
 .how.to.use {
   padding: 30px;
   margin-top: 60px;

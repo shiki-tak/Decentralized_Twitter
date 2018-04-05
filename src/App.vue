@@ -6,13 +6,8 @@
         <router-link to="/timeline"> Timeline</router-link> |
         <router-link to="/tweet">Tweet</router-link>
       </div>
-      <div class="app title">
-        <p>Decentralized Twitter</p>
-      </div>
     </div>
-    <div class="middle">
-      <router-view/>
-    </div>
+    <router-view/>
   </div>
 </template>
 
@@ -55,7 +50,7 @@ export default {
 
 .header {
   background-color: #303030;
-  height: 300px;
+  height: 48px;
   width: 100%;
 }
 
@@ -63,14 +58,4 @@ export default {
   color: white;
 }
 
-.app.title {
-  padding-top: 50px;
-  font-size: 45px;
-  text-align: center;
-  color: white;
-}
-
-.middle {
-  padding: 10px;
-}
 </style>

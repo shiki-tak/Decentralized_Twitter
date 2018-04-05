@@ -15,3 +15,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.tweet {
+  padding: 15px;
+}
+</style>

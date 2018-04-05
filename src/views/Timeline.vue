@@ -95,3 +95,8 @@ export default {
   }
 }
 </script>
+<style>
+.timeline {
+  padding: 15px;
+}
+</style>
