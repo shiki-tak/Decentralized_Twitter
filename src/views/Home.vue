@@ -7,7 +7,7 @@
     </div>
     <div class="about">
       <center>
-        <h1>About Us</h1>
+        <h1>About</h1>
         <p>これは分散型アプリケーション(DApps)として作られたtweet投稿サイトです。</p>
         <p>このサイトではTweetに代わって、DTweet(Decentralized Tweet)を行うことができます。</p>
         <p>あなたのDTweetはブロックチェーンの一つであるEthereum上に記録され、運営主体にデータを集められることはありません。</p>
@@ -18,26 +18,29 @@
       <center>
         <h1>How to Use It</h1>
       </center>
-      <div class="metamask install">
+      <div class="install metamask">
         <h2>1. Install MetaMask</h2>
         <ul>
-          <li>まず、Google Chrome用のプラグインである<a href="https://metamask.io/">MetaMask</a>をインストールします。</li>
-          <li>MetaMaskはEthereumを使った分散型アプリケーション(DApps)を簡単に使うことができるプラグインであり、現在開発されているDAppsはほとんどMetaMaskを使って動作する用に作られています。</li>
-          <li>インストールが完了したら、ネットワークをRopsten Test Networkに設定します。</li>
+          <p>まず、Google Chrome用のプラグインである<a href="https://metamask.io/">MetaMask</a>をインストールします。</p>
+          <p>MetaMaskはEthereumを使った分散型アプリケーション(DApps)を簡単に使うことができるプラグインであり、現在開発されているDAppsはほとんどMetaMaskを使って動作する用に作られています。</p>
+          <p>インストールが完了したら、ネットワークをRopsten Test Networkに設定します。</p>
         </ul>
       </div>
-      <div class="tweet">
+      <div class="send dtweet">
         <h2>2. Send DTweet</h2>
         <ul>
-          <li>DTweetタブから分散型ツイート(DTweet)しよう。</li>
+          <p>DTweetタブから分散型ツイート(DTweet)しよう。</p>
         </ul>
       </div>
+    </div>
+    <div class="footer">
+      Made by shiki_tak
     </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
+// @ is an apas to /src
 import SimpleStorage from '@/components/SimpleStorage.vue'
 
 export default {
@@ -52,7 +55,7 @@ export default {
 .app.title {
   background-color: #303030;
   height: 265px;
-  text-align: center;
+  text-apgn: center;
   color: white;
 }
 
@@ -60,9 +63,21 @@ export default {
   margin-top: -15px;
   padding-top: 30px;
   font-size: 45px;
+  text-align: center;
 }
 .how.to.use {
   padding: 30px;
   margin-top: 60px;
+}
+
+.send.dtweet {
+  margin-top: 40px;
+}
+
+.footer {
+  height: 60px;
+  background-color: #eee;
+  padding: 10px 20px 30px 20px;
+  position: relative;
 }
 </style>

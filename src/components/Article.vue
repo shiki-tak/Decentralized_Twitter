@@ -1,39 +1,45 @@
 <template>
   <div class="article">
-    <div class="content">
-      <h3>Create Article</h3>
+    <div class="content post">
+      <h3>App Info</h3>
       <p v-if="contractAddress">The contract is deployed at {{contractAddress}}</p>
       <p v-if="!contractAddress">No contracts found</p>
       <p v-if="account">Current address: {{account}}</p>
       <p v-if="!account">No accounts found</p>
-      <h3>Tweet</h3>
-      <form novalidate class="md-layout">
-        <md-card-content>
-          <div class="md-layout md-gutter">
-            <md-field>
-              <label for="title">Title</label>
-              <md-input type="text" name="title" id="title" autocomplete="title" v-model="title" class="blog form" />
-            </md-field>
-            <md-field>
-              <label for="content">Content</label>
-              <md-input type="text" name="content" id="content" autocomplete="content" v-model="content" class="blog form" />
-            </md-field>
-          </div>
-          <md-card-actions>
-            <div class="blog create button">
-              <md-button @click="createArticle">Create</md-button>
+      <center>
+        <h3>DTweetする</h3>
+        <form novalidate class="md-layout">
+          <md-card-content>
+            <div class="md-layout md-gutter">
+              <md-field>
+                <label for="title">Title</label>
+                <md-input type="text" name="title" id="title" autocomplete="title" v-model="title" class="blog form" />
+              </md-field>
+              <md-field>
+                <label for="content">Content</label>
+                <md-input type="text" name="content" id="content" autocomplete="content" v-model="content" class="blog form" />
+              </md-field>
             </div>
-          </md-card-actions>
-        </md-card-content>
-      </form>
+            <md-card-actions>
+              <div class="blog create button">
+                <md-button @click="createArticle">Create</md-button>
+              </div>
+            </md-card-actions>
+          </md-card-content>
+        </form>
+      </center>
     </div>
     <div class="message" v-if="message">{{message}}</div>
     <div class="transaction" v-if="transaction">{{transaction}}</div>
-    <h4>Your DTweet</h4>
-    <div v-for="(blog, key, index) in blogs" :key="index">
-      <p>Title: {{ blog.title }}</p>
-      <p>Content: {{ blog.content }}</p>
-      <md-button class="md-raised md-accent" @click="deleteArticle(blog.id)">Delete</md-button>
+    <center>
+      <h4>Your DTweet</h4>
+    </center>
+    <div class>
+      <div v-for="(blog, key, index) in blogs" :key="index" class="dtweet list myself">
+        <p>Title: {{ blog.title }}</p>
+        <p>Content: {{ blog.content }}</p>
+        <md-button class="md-raised" @click="deleteArticle(blog.id)">Delete</md-button>
+      </div>
     </div>
   </div>
 </template>
@@ -126,6 +132,17 @@ export default {
 }
 </script>
 <style>
+.md-card-content {
+  margin-left: 300px;
+}
+
+.dtweet.list.myself {
+  border-bottom: solid 1px rgba(0,0,0,0.42);
+  margin-left: 300px;
+  margin-right: 300px;
+  margin-top: 50px;
+}
+
 .blog.form {
   width: 400px !important;
 }
