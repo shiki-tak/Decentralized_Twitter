@@ -3,10 +3,12 @@
     <div class="content post">
       <center>
         <h3>App Info</h3>
-        <p v-if="contractAddress">The contract is deployed at {{contractAddress}}</p>
-        <p v-if="!contractAddress">No contracts found</p>
-        <p v-if="account">Current address: {{account}}</p>
-        <p v-if="!account">No accounts found</p>
+        <p v-if="!is_network">This Network is Not Ropsten!</a>
+        <p v-if="!is_network">Please check your Network!</a>
+        <p v-if="contractAddress && is_network">The contract is deployed at {{contractAddress}}</p>
+        <p v-if="!contractAddress && is_network">No contracts found</p>
+        <p v-if="account && is_network">Current address: {{account}}</p>
+        <p v-if="!account && is_network">No accounts found</p>
       </center>
       <center>
         <h3>DTweetする</h3>
@@ -24,7 +26,7 @@
             </div>
             <md-card-actions>
               <div class="blog create button">
-                <md-button @click="createArticle">Create</md-button>
+                <md-button @click="createArticle" v-bind:disabled="!is_network">Create</md-button>
               </div>
             </md-card-actions>
           </md-card-content>
@@ -60,9 +62,11 @@ export default {
   data() {
     return {
       blogs: [],
+      is_network: true,
       message: null,
       tx_hash: null,
       tx_url: null,
+      network: null,
       contractAddress: null,
       account: null,
       title: null,
@@ -70,14 +74,28 @@ export default {
     }
   },
   created() {
+    if (typeof web3 !== 'undefined') {
+      console.warn("Using web3 detected from external source. If you find that your accounts don't appear or you have 0 Fluyd, ensure you've configured that source properly. If using MetaMask, see the following link. Feel free to delete this warning. :) http://truffleframework.com/tutorials/truffle-and-metamask")
+      // Use Mist/MetaMask's provider
+      web3 = new Web3(web3.currentProvider)
+    } else {
+      console.warn("No web3 detected. Falling back to http://127.0.0.1:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask")
+      // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+      web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"))
+    }
+
     CryptoArticle.setProvider(web3.currentProvider)
     web3.eth.getAccounts((err, accs) => {
+      if (web3.currentProvider.publicConfigStore._state.networkVersion !== '3') {
+        this.is_network = false
+      } else {
+        this.is_network = true
+      }
       if (err != null) {
         console.log(err)
         this.message = "There was an error fetching your accounts. Do you have Metamask, Mist installed or an Ethereum node running? If not, you might want to look into that"
         return
       }
-
       if (accs.length == 0) {
         this.message = "Couldn't get any accounts! Make sure your Ethereum client is configured correctly."
         return

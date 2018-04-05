@@ -30,13 +30,13 @@
         <h2>2. Send DTweet</h2>
         <ul>
           <p>DTweetタブからDTweetのTitleとContentを入力します。</p>
-          <img src="../assets/dtweet.png" style="width: 600px; height: auto;"/>
+          <img src="../assets/dtweet.png" style="width: 600px; height: auto; margin-bottom: 30px"/>
           <p>MetaMaskの"CONFIRM TRANSACTION"が開くので、"SUBMIT"をクリックします。</p>
-          <img src="../assets/tx_metamask.png" style="width: auto; height: 300px;"/>
-          <p>Transactionがブロックに書き込まれると、DTweetが表示されます。</p>
-          <img src="../assets/dtweet_result.png" style="width: auto; height: 300px;"/>
+          <img src="../assets/tx_metamask.png" style="width: auto; height: 300px; margin-bottom: 30px"/>
+          <p>ネットワークの状態にもよりますが、30秒ほどでTransactionが承認され、DTweetが表示されます。</p>
+          <img src="../assets/dtweet_result.png" style="width: auto; height: 300px; margin-bottom: 30px"/>
           <p>Transaction HashのリンクをクリックするとRopsten Test NetのEtherscanが開きます。</p>
-          <img src="../assets/ropsten_res.png" style="width: auto; height: 300px;"/>
+          <img src="../assets/ropsten_res.png" style="width: 700px; height: auto; margin-bottom: 30px"/>
         </ul>
       </div>
     </div>
