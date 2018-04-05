@@ -4,7 +4,7 @@
       <div id="nav">
         <router-link to="/">Home</router-link> |
         <router-link to="/timeline"> Timeline</router-link> |
-        <router-link to="/tweet">DTweet</router-link>
+        <router-link to="/mypage">Mypage</router-link>
       </div>
     </div>
     <router-view/>

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Timeline from './views/Timeline.vue'
-import Tweet from './views/Tweet.vue'
+import Mypage from './views/Mypage.vue'
 
 Vue.use(Router)
 
@@ -19,9 +19,9 @@ export default new Router({
       component: Timeline
     },
     {
-      path: '/tweet',
-      name: 'tweet',
-      component: Tweet
+      path: '/mypage',
+      name: 'mypage',
+      component: Mypage
     }
   ]
 })

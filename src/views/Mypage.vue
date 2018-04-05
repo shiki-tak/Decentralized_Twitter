@@ -1,5 +1,5 @@
 <template>
-  <div class="tweet">
+  <div class="mypage">
     <DTweet/>
   </div>
 </template>
@@ -9,7 +9,7 @@
 import DTweet from '@/components/DTweet.vue'
 
 export default {
-  name: 'tweet',
+  name: 'mypage',
   components: {
     DTweet
   }
@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style>
-.tweet {
+.mypage {
   padding: 15px;
 }
 </style>

@@ -2,7 +2,7 @@
   <div class="DTweet">
     <div class="content post">
       <center>
-        <h3>App Info</h3>
+        <h3>Network Info</h3>
         <p v-if="!is_network">This Network is Not Ropsten!</a>
         <p v-if="!is_network">Please check your Network!</a>
         <p v-if="contractAddress && is_network">The contract is deployed at {{contractAddress}}</p>

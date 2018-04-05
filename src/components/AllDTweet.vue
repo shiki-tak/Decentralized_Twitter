@@ -7,7 +7,7 @@
       <div v-for="(dtweet, key, index) in dtweets" :key="index" class="dtweet list">
         <p>Title: {{ dtweet.title }}</p>
         <p>Content: {{ dtweet.content }}</p>
-        <p>Content: {{ dtweet.content }}</p>
+        <p>Account Address: {{ dtweet.mintedBy }}</p>
         <md-button class="md-raised" @click="deleteDTweet(dtweet.id)">Delete</md-button>
       </div>
     </div>
@@ -93,10 +93,12 @@ export default {
       DTweetToken.deployed().then((instance) => instance.getDTweet(tokenId, { from: this.account })).then((r) => {
         var dtweet = {
           "title": null,
-          "content": null
+          "content": null,
+          "mintedBy": null
         }
         dtweet.title = r[0].toString()
         dtweet.content = r[1].toString()
+        dtweet.mintedBy = r[3].toString()
         this.dtweets.push(dtweet)
       })
     }
