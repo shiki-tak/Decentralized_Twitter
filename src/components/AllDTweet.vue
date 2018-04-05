@@ -7,7 +7,7 @@
       <div v-for="(blog, key, index) in blogs" :key="index" class="dtweet list">
         <p>Title: {{ blog.title }}</p>
         <p>Content: {{ blog.content }}</p>
-        <md-button class="md-raised" @click="deleteArticle(blog.id)">Delete</md-button>
+        <md-button class="md-raised" @click="deleteDTweet(blog.id)">Delete</md-button>
       </div>
     </div>
   </div>
@@ -18,7 +18,7 @@ import Web3 from 'web3'
 import contract from 'truffle-contract'
 import artifacts from '../../build/contracts/DTweetToken.json'
 
-const CryptoArticle = contract(artifacts)
+const DTweetToken = contract(artifacts)
 
 export default {
   name: 'AllDTweet',
@@ -40,7 +40,7 @@ export default {
       // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
       web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"))
     }
-    CryptoArticle.setProvider(web3.currentProvider)
+    DTweetToken.setProvider(web3.currentProvider)
     web3.eth.getAccounts((err, accs) => {
       if (web3.currentProvider.publicConfigStore._state.networkVersion !== '3') {
         this.is_network = false
@@ -57,39 +57,39 @@ export default {
         return
       }
       this.account = accs[0];
-      CryptoArticle.deployed()
+      DTweetToken.deployed()
         .then((instance) => instance.address)
         .then((address) => {
           this.contractAddress = address
-          this.updateArticle();
+          this.updateDTweet();
         })
     })
   },
   methods: {
-    createArticle() {
+    createDTweet() {
       this.message = "Transaction started";
-      return CryptoArticle.deployed()
+      return DTweetToken.deployed()
         .then((instance) => instance.mint(this.title, this.content, true, { from: this.account }))
         .then(() => {
           this.message = "Transaction done"
           this.title = null
           this.content = null
-          this.updateArticle();
+          this.updateDTweet();
         })
         .catch((e) => {
           console.error(e)
           this.message = "Transaction failed"
         })
     },
-    updateArticle() {
-      CryptoArticle.deployed().then((instance) => instance.getAllArticles()).then((r) => {
+    updateDTweet() {
+      DTweetToken.deployed().then((instance) => instance.getAllDTweets()).then((r) => {
         for (var i = 0; i < r.length; i++) {
-          this.getArticle(r[i]);
+          this.getDTweet(r[i]);
         }
       })
     },
-    getArticle(tokenId) {
-      CryptoArticle.deployed().then((instance) => instance.getArticle(tokenId, { from: this.account })).then((r) => {
+    getDTweet(tokenId) {
+      DTweetToken.deployed().then((instance) => instance.getDTweet(tokenId, { from: this.account })).then((r) => {
         var blog = {
           "title": null,
           "content": null

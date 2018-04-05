@@ -1,5 +1,5 @@
 <template>
-  <div class="article">
+  <div class="DTweet">
     <div class="content post">
       <center>
         <h3>App Info</h3>
@@ -26,7 +26,7 @@
             </div>
             <md-card-actions>
               <div class="blog create button">
-                <md-button @click="createArticle" v-bind:disabled="!is_network">Create</md-button>
+                <md-button @click="createDTweet" v-bind:disabled="!is_network">Create</md-button>
               </div>
             </md-card-actions>
           </md-card-content>
@@ -45,7 +45,7 @@
       <div v-for="(blog, key, index) in blogs" :key="index" class="dtweet list myself">
         <p>Title: {{ blog.title }}</p>
         <p>Content: {{ blog.content }}</p>
-        <md-button class="md-raised" @click="deleteArticle(blog.id)">Delete</md-button>
+        <md-button class="md-raised" @click="deleteDTweet(blog.id)">Delete</md-button>
       </div>
     </div>
   </div>
@@ -55,10 +55,10 @@
 import Web3 from 'web3'
 import contract from 'truffle-contract'
 import artifacts from '../../build/contracts/DTweetToken.json'
-const CryptoArticle = contract(artifacts)
+const DTweetToken = contract(artifacts)
 
 export default {
-  name: 'Article',
+  name: 'DTweet',
   data() {
     return {
       blogs: [],
@@ -84,7 +84,7 @@ export default {
       web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"))
     }
 
-    CryptoArticle.setProvider(web3.currentProvider)
+    DTweetToken.setProvider(web3.currentProvider)
     web3.eth.getAccounts((err, accs) => {
       // このタイミングでcrrentProviderのnetwork idを調べると、UIが動的に更新されるみたい
       if (web3.currentProvider.publicConfigStore._state.networkVersion !== '3') {
@@ -102,18 +102,18 @@ export default {
         return
       }
       this.account = accs[0];
-      CryptoArticle.deployed()
+      DTweetToken.deployed()
         .then((instance) => instance.address)
         .then((address) => {
           this.contractAddress = address
-          this.updateArticle();
+          this.updateDTweet();
         })
     })
   },
   methods: {
-    createArticle() {
+    createDTweet() {
       this.message = "Transaction started";
-      return CryptoArticle.deployed()
+      return DTweetToken.deployed()
         .then((instance) => instance.mint(this.title, this.content, true, { from: this.account }))
         .then((r) => {
           this.tx_hash = r.tx
@@ -139,15 +139,15 @@ export default {
           this.message = "Transaction failed"
         })
     },
-    updateArticle() {
-      CryptoArticle.deployed().then((instance) => instance.getAllArticlesOfOwner(this.account, { from: this.account })).then((r) => {
+    updateDTweet() {
+      DTweetToken.deployed().then((instance) => instance.getAllDTweetsOfOwner(this.account, { from: this.account })).then((r) => {
         for (var i = 0; i < r.length; i++) {
-          this.getArticle(r[i]);
+          this.getDTweet(r[i]);
         }
       })
     },
-    getArticle(tokenId) {
-      CryptoArticle.deployed().then((instance) => instance.getArticle(tokenId, { from: this.account })).then((r) => {
+    getDTweet(tokenId) {
+      DTweetToken.deployed().then((instance) => instance.getDTweet(tokenId, { from: this.account })).then((r) => {
         var blog = {
           "id": null,
           "title": null,
@@ -160,12 +160,12 @@ export default {
         this.blogs.push(blog)
       })
     },
-    deleteArticle(tokenId){
-      CryptoArticle.deployed().then((instance) => instance.burn(tokenId, { from: this.account })).then((r) => {
+    deleteDTweet(tokenId){
+      DTweetToken.deployed().then((instance) => instance.burn(tokenId, { from: this.account })).then((r) => {
         this.tx_hash = r.tx
         this.tx_url = 'https://ropsten.etherscan.io/tx/' + r.tx
         this.blogs = []
-        this.updateArticle();
+        this.updateDTweet();
       })
     }
   }

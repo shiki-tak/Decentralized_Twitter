@@ -1,17 +1,17 @@
 <template>
   <div class="tweet">
-    <Article/>
+    <DTweet/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Article from '@/components/Article.vue'
+import DTweet from '@/components/DTweet.vue'
 
 export default {
   name: 'tweet',
   components: {
-    Article
+    DTweet
   }
 }
 </script>

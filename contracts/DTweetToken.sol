@@ -45,7 +45,7 @@ contract DTweetToken is ERC721Token {
     }
   }
 
-  function getArticle(uint256 _tokenId) external view returns (string title, string content, bool publishing, address mintedBy, uint64 mintedAt) {
+  function getDTweet(uint256 _tokenId) external view returns (string title, string content, bool publishing, address mintedBy, uint64 mintedAt) {
     DTweet memory dTweet = DTweets[_tokenId];
 
     title = dTweet.title;
@@ -55,11 +55,11 @@ contract DTweetToken is ERC721Token {
     mintedAt = dTweet.mintedAt;
   }
 
-  function getAllArticlesOfOwner(address _owner) external view returns (uint256[]) {
+  function getAllDTweetsOfOwner(address _owner) external view returns (uint256[]) {
     return ownedTokens[_owner];
   }
 
-  function getAllArticles() external view returns (uint256[]) {
+  function getAllDTweets() external view returns (uint256[]) {
     return allTokens;
   }
 }
