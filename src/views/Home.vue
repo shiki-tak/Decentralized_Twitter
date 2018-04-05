@@ -5,7 +5,7 @@
         <p>Decentralized Twitter</p>
       </div>
       <img src="../assets/ether_icon.png" style="width: 90px;" />
-      <h3>Ethereumを使った分散型アプリケーションとしてのTweetサイト</h3>
+      <h3>Ethereumを使った分散型アプリケーション(DApps)としてのTweetサイト</h3>
     </div>
     <div class="about">
       <center>
@@ -25,7 +25,8 @@
         <h2>1. Install MetaMask</h2>
         <ul>
           <p>まず、Google Chrome用のプラグインである<a href="https://metamask.io/">MetaMask</a>をインストールします。</p>
-          <p>MetaMaskはEthereumを使った分散型アプリケーション(DApps)を簡単に使うことができるプラグインであり、現在開発されているDAppsはほとんどMetaMaskを使って動作する用に作られています。</p>
+          <p>MetaMaskはEthereumを使ったDAppsを簡単に使うことができるプラグインであり、
+            最近ではCryptoKittiesを代表とするEthereum上のゲームをプレイするときに多く用いられているウォレットです。</p>
           <p>インストールが完了したら、ネットワークをRopsten Test Networkに設定します。</p>
           <img src="../assets/network_state.png" style="width: 300px; height: auto; box-shadow: 2px 2px 5px 2px #ddd;"/>
         </ul>

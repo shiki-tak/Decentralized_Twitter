@@ -5,7 +5,7 @@
 - solidity 0.4.18
 - Truffle 4.0.4
 - zeppelin-solidity 1.8.0
-- Metamask
+- MetaMask
 
 ## Set up
 ```
