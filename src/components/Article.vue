@@ -35,7 +35,7 @@
       <h3>Transaction State</h3>
       <div class="message" v-if="message">{{message}}</div>
       <div class="message" v-if="!message">transaction nothing</div>
-      <div class="tx_hash" v-if="tx_hash">Tx Hash: <router-link :to="{ name: 'https://ropsten.etherscan.io/tx/' + tx_hash }">{{tx_hash}}</router-link></div>
+      <div class="tx_hash" v-if="tx_hash">Tx Hash: <a v-bind:href="tx_url">{{tx_hash}}</a></div>
     </center>
     <center>
       <h3>Your DTweet</h3>
@@ -63,6 +63,7 @@ export default {
       blogs: [],
       message: null,
       tx_hash: null,
+      tx_url: null,
       contractAddress: null,
       account: null,
       title: null,
@@ -98,7 +99,7 @@ export default {
         .then((instance) => instance.mint(this.title, this.content, true, { from: this.account }))
         .then((r) => {
           this.tx_hash = r.tx
-          console.log(r.tx)
+          this.tx_url = 'https://ropsten.etherscan.io/tx/' + r.tx
           this.message = "Transaction result"
           this.title = null
           this.content = null
@@ -133,6 +134,7 @@ export default {
     deleteArticle(tokenId){
       CryptoArticle.deployed().then((instance) => instance.burn(tokenId, { from: this.account })).then((r) => {
         this.tx_hash = r.tx
+        this.tx_url = 'https://ropsten.etherscan.io/tx/' + r.tx
         this.updateArticle();
       })
     }
