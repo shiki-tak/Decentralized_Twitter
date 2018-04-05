@@ -54,7 +54,7 @@
       </div>
     </div>
     <div class="footer">
-      Made by <a href="https://twitter.com/shiki_tak">shiki_tak</a>
+      @2018 <a href="https://twitter.com/shiki_tak">shiki_tak.</a> All Rights Reserved.
     </div>
   </div>
 </template>
