@@ -24,6 +24,7 @@
           <p>まず、Google Chrome用のプラグインである<a href="https://metamask.io/">MetaMask</a>をインストールします。</p>
           <p>MetaMaskはEthereumを使った分散型アプリケーション(DApps)を簡単に使うことができるプラグインであり、現在開発されているDAppsはほとんどMetaMaskを使って動作する用に作られています。</p>
           <p>インストールが完了したら、ネットワークをRopsten Test Networkに設定します。</p>
+          <img src="../assets/network_state.png" style="width: 300px; height: auto; margin-bottom: 30px"/>
         </ul>
       </div>
       <div class="send dtweet">
