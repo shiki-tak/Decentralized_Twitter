@@ -34,7 +34,6 @@
     <center>
       <h3>Transaction State</h3>
       <div class="message" v-if="message">{{message}}</div>
-      <div class="message" v-if="!message">transaction nothing</div>
       <div class="tx_hash" v-if="tx_hash">Tx Hash: <a v-bind:href="tx_url">{{tx_hash}}</a></div>
     </center>
     <center>
@@ -101,9 +100,20 @@ export default {
           this.tx_hash = r.tx
           this.tx_url = 'https://ropsten.etherscan.io/tx/' + r.tx
           this.message = "Transaction result"
+          var blog = {
+            "id": null,
+            "title": null,
+            "content": null,
+            "mintedBy": null
+          }
+          blog.id = this.blogs.length + 1
+          blog.title = this.title
+          blog.content = this.content
+          blog.mintedBy = this.account
+
+          this.blogs.push(blog)
           this.title = null
           this.content = null
-          this.updateArticle();
         })
         .catch((e) => {
           console.error(e)
@@ -135,6 +145,7 @@ export default {
       CryptoArticle.deployed().then((instance) => instance.burn(tokenId, { from: this.account })).then((r) => {
         this.tx_hash = r.tx
         this.tx_url = 'https://ropsten.etherscan.io/tx/' + r.tx
+        this.blogs = []
         this.updateArticle();
       })
     }

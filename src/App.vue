@@ -8,9 +8,6 @@
       </div>
     </div>
     <router-view/>
-    <div class="footer">
-      Made by <a href="https://twitter.com/shiki_tak">shiki_tak</a>
-    </div>
   </div>
 </template>
 
@@ -59,12 +56,5 @@ export default {
 
 #nav a {
   color: white;
-}
-
-.footer {
-  height: 60px;
-  background-color: #eee;
-  padding: 10px 20px 30px 20px;
-  position: relative;
 }
 </style>

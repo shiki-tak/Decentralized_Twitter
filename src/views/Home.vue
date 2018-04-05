@@ -33,8 +33,15 @@
           <img src="../assets/dtweet.png" style="width: 600px; height: auto;"/>
           <p>MetaMaskの"CONFIRM TRANSACTION"が開くので、"SUBMIT"をクリックします。</p>
           <img src="../assets/tx_metamask.png" style="width: auto; height: 300px;"/>
+          <p>Transactionがブロックに書き込まれると、DTweetが表示されます。</p>
+          <img src="../assets/dtweet_result.png" style="width: auto; height: 300px;"/>
+          <p>Transaction HashのリンクをクリックするとRopsten Test NetのEtherscanが開きます。</p>
+          <img src="../assets/ropsten_res.png" style="width: auto; height: 300px;"/>
         </ul>
       </div>
+    </div>
+    <div class="footer">
+      Made by <a href="https://twitter.com/shiki_tak">shiki_tak</a>
     </div>
   </div>
 </template>
@@ -73,5 +80,12 @@ export default {
 
 .send.dtweet {
   margin-top: 40px;
+}
+
+.footer {
+  height: 60px;
+  background-color: #eee;
+  padding: 10px 20px 30px 20px;
+  position: relative;
 }
 </style>
