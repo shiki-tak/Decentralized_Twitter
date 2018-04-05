@@ -7,7 +7,7 @@
 <script>
 import Web3 from 'web3'
 import contract from 'truffle-contract'
-import artifacts from '../../build/contracts/CryptoArticleToken.json'
+import artifacts from '../../build/contracts/DTweetToken.json'
 
 import AllDTweet from '@/components/AllDTweet.vue'
 const CryptoArticle = contract(artifacts)

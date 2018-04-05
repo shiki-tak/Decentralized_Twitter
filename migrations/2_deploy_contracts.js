@@ -1,7 +1,5 @@
-var SimpleStorage = artifacts.require("./SimpleStorage.sol");
-var CryptoArticleToken = artifacts.require("./CryptoArticleToken.sol");
+var DTweetToken = artifacts.require("./DTweetToken.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(SimpleStorage);
-  deployer.deploy(CryptoArticleToken, "CryptoArticleToken", "CAT");
+  deployer.deploy(DTweetToken, "DTweetToken", "CAT");
 };

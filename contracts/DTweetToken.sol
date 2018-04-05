@@ -2,10 +2,10 @@ pragma solidity ^0.4.16;
 
 import 'zeppelin-solidity/contracts/token/ERC721/ERC721Token.sol';
 
-contract CryptoArticleToken is ERC721Token {
+contract DTweetToken is ERC721Token {
 
   /* DATA TYPE */
-  struct CryptoArticle {
+  struct DTweet {
     string title;
     string content;
     bool publishing;
@@ -14,24 +14,24 @@ contract CryptoArticleToken is ERC721Token {
   }
 
   /* STORAGE */
-  CryptoArticle[] cryptoArticles;
+  DTweet[] DTweets;
 
   event Mint(address owner, uint256 tokenId);
 
   /* CONSTRUCTOR */
-  function CryptoArticleToken(string _name, string _symbol) public ERC721Token(_name, _symbol) {}
+  function DTweetToken(string _name, string _symbol) public ERC721Token(_name, _symbol) {}
 
   /* ERC721 IMPLEMENTATION */
   function mint(string _title, string _content, bool _publishing) external returns (uint256) {
     require(msg.sender != address(0));
-    CryptoArticle memory cryptoArticle = CryptoArticle({
+    DTweet memory dTweet = DTweet({
         title: _title,
         content: _content,
         publishing: _publishing,
         mintedBy: msg.sender,
         mintedAt: uint64(now)
       });
-      uint256 tokenId = cryptoArticles.push(cryptoArticle) - 1;
+      uint256 tokenId = DTweets.push(dTweet) - 1;
       super._mint(msg.sender, tokenId);
 
       Mint(msg.sender, tokenId);
@@ -40,19 +40,19 @@ contract CryptoArticleToken is ERC721Token {
 
   function burn(uint256 _tokenId) public {
     super._burn(ownerOf(_tokenId), _tokenId);
-    if (cryptoArticles.length != 0) {
-      delete cryptoArticles[_tokenId];
+    if (DTweets.length != 0) {
+      delete DTweets[_tokenId];
     }
   }
 
   function getArticle(uint256 _tokenId) external view returns (string title, string content, bool publishing, address mintedBy, uint64 mintedAt) {
-    CryptoArticle memory cryptoArticle = cryptoArticles[_tokenId];
+    DTweet memory dTweet = DTweets[_tokenId];
 
-    title = cryptoArticle.title;
-    content = cryptoArticle.content;
-    publishing = cryptoArticle.publishing;
-    mintedBy = cryptoArticle.mintedBy;
-    mintedAt = cryptoArticle.mintedAt;
+    title = dTweet.title;
+    content = dTweet.content;
+    publishing = dTweet.publishing;
+    mintedBy = dTweet.mintedBy;
+    mintedAt = dTweet.mintedAt;
   }
 
   function getAllArticlesOfOwner(address _owner) external view returns (uint256[]) {
