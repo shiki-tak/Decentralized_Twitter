@@ -4,6 +4,7 @@
       <div class="name">
         <p>Decentralized Twitter</p>
       </div>
+      <img src="../assets/ether_icon.png" style="width: 90px;" />
       <h3>Ethereumを使った分散型アプリケーションとしてのTweetサイト</h3>
     </div>
     <div class="about">
@@ -74,26 +75,29 @@ export default {
 
 .app.title {
   background-color: #303030;
-  height: 265px;
+  height: 285px;
   text-align: center;
   color: white;
 }
 
 .name {
   margin-top: -15px;
-  padding-top: 30px;
+  padding-top: 5px;
   font-size: 45px;
   text-align: center;
+  p {
+    margin-bottom: 5px !important;
+  }
 }
 .how.to.use {
   padding: 30px;
   margin-top: 60px;
+  img {
+    margin-bottom: 30px;
+    box-shadow: 2px 2px 5px 2px #ddd;
+  }
 }
 
-img {
-  margin-bottom: 30px;
-  box-shadow: 2px 2px 5px 2px #ddd;
-}
 .send.dtweet {
   margin-top: 40px;
 }
