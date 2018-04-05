@@ -4,10 +4,11 @@
       <h3>All DTweet</h3>
     </center>
     <div class>
-      <div v-for="(blog, key, index) in blogs" :key="index" class="dtweet list">
-        <p>Title: {{ blog.title }}</p>
-        <p>Content: {{ blog.content }}</p>
-        <md-button class="md-raised" @click="deleteDTweet(blog.id)">Delete</md-button>
+      <div v-for="(dtweet, key, index) in dtweets" :key="index" class="dtweet list">
+        <p>Title: {{ dtweet.title }}</p>
+        <p>Content: {{ dtweet.content }}</p>
+        <p>Content: {{ dtweet.content }}</p>
+        <md-button class="md-raised" @click="deleteDTweet(dtweet.id)">Delete</md-button>
       </div>
     </div>
   </div>
@@ -24,7 +25,7 @@ export default {
   name: 'AllDTweet',
   data() {
     return {
-      blogs: [],
+      dtweets: [],
       message: null,
       title: null,
       content: null
@@ -90,13 +91,13 @@ export default {
     },
     getDTweet(tokenId) {
       DTweetToken.deployed().then((instance) => instance.getDTweet(tokenId, { from: this.account })).then((r) => {
-        var blog = {
+        var dtweet = {
           "title": null,
           "content": null
         }
-        blog.title = r[0].toString()
-        blog.content = r[1].toString()
-        this.blogs.push(blog)
+        dtweet.title = r[0].toString()
+        dtweet.content = r[1].toString()
+        this.dtweets.push(dtweet)
       })
     }
   }

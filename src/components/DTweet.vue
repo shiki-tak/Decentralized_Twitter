@@ -17,15 +17,15 @@
             <div class="md-layout md-gutter">
               <md-field>
                 <label for="title">Title</label>
-                <md-input type="text" name="title" id="title" autocomplete="title" v-model="title" class="blog form" />
+                <md-input type="text" name="title" id="title" autocomplete="title" v-model="title" class="dtweet form" />
               </md-field>
               <md-field>
                 <label for="content">Content</label>
-                <md-input type="text" name="content" id="content" autocomplete="content" v-model="content" class="blog form" />
+                <md-input type="text" name="content" id="content" autocomplete="content" v-model="content" class="dtweet form" />
               </md-field>
             </div>
             <md-card-actions>
-              <div class="blog create button">
+              <div class="dtweet create button">
                 <md-button @click="createDTweet" v-bind:disabled="!is_network">Create</md-button>
               </div>
             </md-card-actions>
@@ -42,10 +42,10 @@
       <h3>Your DTweet</h3>
     </center>
     <div class>
-      <div v-for="(blog, key, index) in blogs" :key="index" class="dtweet list myself">
-        <p>Title: {{ blog.title }}</p>
-        <p>Content: {{ blog.content }}</p>
-        <md-button class="md-raised" @click="deleteDTweet(blog.id)">Delete</md-button>
+      <div v-for="(dtweet, key, index) in dtweets" :key="index" class="dtweet list myself">
+        <p>Title: {{ dtweet.title }}</p>
+        <p>Content: {{ dtweet.content }}</p>
+        <md-button class="md-raised" @click="deleteDTweet(dtweet.id)">Delete</md-button>
       </div>
     </div>
   </div>
@@ -61,7 +61,7 @@ export default {
   name: 'DTweet',
   data() {
     return {
-      blogs: [],
+      dtweets: [],
       is_network: true,
       message: null,
       tx_hash: null,
@@ -119,18 +119,18 @@ export default {
           this.tx_hash = r.tx
           this.tx_url = 'https://ropsten.etherscan.io/tx/' + r.tx
           this.message = "Transaction result"
-          var blog = {
+          var dtweet = {
             "id": null,
             "title": null,
             "content": null,
             "mintedBy": null
           }
-          blog.id = this.blogs.length + 1
-          blog.title = this.title
-          blog.content = this.content
-          blog.mintedBy = this.account
+          dtweet.id = this.dtweets.length + 1
+          dtweet.title = this.title
+          dtweet.content = this.content
+          dtweet.mintedBy = this.account
 
-          this.blogs.push(blog)
+          this.dtweets.push(dtweet)
           this.title = null
           this.content = null
         })
@@ -148,23 +148,23 @@ export default {
     },
     getDTweet(tokenId) {
       DTweetToken.deployed().then((instance) => instance.getDTweet(tokenId, { from: this.account })).then((r) => {
-        var blog = {
+        var dtweet = {
           "id": null,
           "title": null,
           "content": null,
           "mintedBy": null
         }
-        blog.id = tokenId
-        blog.title = r[0].toString()
-        blog.content = r[1].toString()
-        this.blogs.push(blog)
+        dtweet.id = tokenId
+        dtweet.title = r[0].toString()
+        dtweet.content = r[1].toString()
+        this.dtweets.push(dtweet)
       })
     },
     deleteDTweet(tokenId){
       DTweetToken.deployed().then((instance) => instance.burn(tokenId, { from: this.account })).then((r) => {
         this.tx_hash = r.tx
         this.tx_url = 'https://ropsten.etherscan.io/tx/' + r.tx
-        this.blogs = []
+        this.dtweets = []
         this.updateDTweet();
       })
     }
@@ -183,7 +183,7 @@ export default {
   margin-top: 50px;
 }
 
-.blog.form {
+.dtweet.form {
   width: 400px !important;
 }
 </style>

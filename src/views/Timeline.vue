@@ -20,7 +20,7 @@ export default {
 
   data() {
     return {
-      blogs: [],
+      dtweets: [],
       message: null,
       title: null,
       content: null
@@ -86,13 +86,13 @@ export default {
     },
     getDTweet(tokenId) {
       DTweetToken.deployed().then((instance) => instance.getDTweet(tokenId, { from: this.account })).then((r) => {
-        var blog = {
+        var dtweet = {
           "title": null,
           "content": null
         }
-        blog.title = r[0].toString()
-        blog.content = r[1].toString()
-        this.blogs.push(blog)
+        dtweet.title = r[0].toString()
+        dtweet.content = r[1].toString()
+        this.dtweets.push(dtweet)
       })
     }
   }
