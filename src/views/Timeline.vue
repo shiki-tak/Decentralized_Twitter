@@ -62,21 +62,6 @@ export default {
     })
   },
   methods: {
-    createDTweet() {
-      this.message = "Transaction started";
-      return DTweetToken.deployed()
-        .then((instance) => instance.mint(this.title, this.content, true, { from: this.account }))
-        .then(() => {
-          this.message = "Transaction done"
-          this.title = null
-          this.content = null
-          this.updateDTweet();
-        })
-        .catch((e) => {
-          console.error(e)
-          this.message = "Transaction failed"
-        })
-    },
     updateDTweet() {
       DTweetToken.deployed().then((instance) => instance.getAllDTweets()).then((r) => {
         for (var i = 0; i < r.length; i++) {
