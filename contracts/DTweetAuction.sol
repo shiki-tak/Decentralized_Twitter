@@ -1,17 +1,9 @@
 pragma solidity ^0.4.16;
 
-import "./DTweetSale.sol";
+import "./DTweetToken.sol";
 import "./DTweetAuctionBase.sol";
 
-contract DTweetAuction is DTweetAuctionBase {
-
-  DTweetSale dtweetSale;
-
-  /* CONSTRUCTOR */
-  /* デプロイ時にDTweetSale コントラクトのアドレスをセットする */
-  function DTweetAuction(address _address) public {
-    dtweetSale = DTweetSale(_address);
-  }
+contract DTweetAuction is DTweetToken, DTweetAuctionBase {
 
   /* function bid() {
 
@@ -29,7 +21,7 @@ contract DTweetAuction is DTweetAuctionBase {
     uint256 _duration
     ) external {
       require(_owns(msg.sender, _tokenId));
-      dtweetSale.createAuction(
+      _createAuction(
         _tokenId,
         _startingPrice,
         _endingPrice,
@@ -37,5 +29,4 @@ contract DTweetAuction is DTweetAuctionBase {
         msg.sender
     );
   }
-
 }
