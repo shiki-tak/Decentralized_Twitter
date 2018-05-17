@@ -58,7 +58,7 @@
       </div>
     </div>
     <div class="footer">
-      @2018 <a href="https://twitter.com/shiki_tak">shiki_tak.</a> All Rights Reserved.
+      @2018 <a href="https://twitter.com/dapps_developer">shiki@dapps_developer.</a> All Rights Reserved.
     </div>
   </div>
 </template>

@@ -21,7 +21,7 @@
               </md-field>
               <md-field>
                 <label for="content">Content</label>
-                <md-input type="text" name="content" id="content" autocomplete="content" v-model="content" class="dtweet form" />
+                <md-textarea type="text" name="content" id="content" autocomplete="content" v-model="content" class="dtweet form" />
               </md-field>
             </div>
             <md-card-actions>
@@ -44,7 +44,7 @@
     <div class>
       <div v-for="(dtweet, key, index) in dtweets" :key="index" class="dtweet list myself">
         <p>Title: {{ dtweet.title }}</p>
-        <p>Content: {{ dtweet.content }}</p>
+        <p style="white-space: pre;">{{ dtweet.content }}</p>
         <md-button class="md-raised" @click="deleteDTweet(dtweet.id)">Burn</md-button>
       </div>
     </div>
@@ -156,7 +156,7 @@ export default {
         }
         dtweet.id = tokenId
         dtweet.title = r[0].toString()
-        dtweet.content = r[1].toString()
+        dtweet.content = r[1].replace("", "\n")
         this.dtweets.push(dtweet)
       })
     },

@@ -6,7 +6,7 @@
     <div class>
       <div v-for="(dtweet, key, index) in dtweets" :key="index" class="dtweet list">
         <p>Title: {{ dtweet.title }}</p>
-        <p>Content: {{ dtweet.content }}</p>
+        <p style="white-space: pre;">{{ dtweet.content }}</p>
         <p>Account Address: {{ dtweet.mintedBy }}</p>
       </div>
     </div>
