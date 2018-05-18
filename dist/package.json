@@ -1,9 +1,6 @@
 {
   "name": "vue-box",
   "version": "0.1.0",
-  "engines": {
-    "node": "9.4.0"
-  },
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --open",
